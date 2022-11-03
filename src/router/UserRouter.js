@@ -5,6 +5,8 @@ import SingupPage from "../components/signup/singup";
 import Main from "../components/main";
 import Application from "../components/applicaton";
 import Mypage from "../components/mypage";
+import ChangePassword from "../components/changePassword";
+import FindId from "../components/findId";
 
 const UserRotuer = () => {
   return (
@@ -16,6 +18,8 @@ const UserRotuer = () => {
         <Route path="/main" element={<Main />} />
         <Route path="/application" element={<Application />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/change" element={<ChangePassword/>} />
+        <Route path="/findid" element={<FindId/>} />
       </Routes>
     </BrowserRouter>
   );
