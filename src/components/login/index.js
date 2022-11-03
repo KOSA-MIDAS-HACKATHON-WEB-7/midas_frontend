@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 const LoginPage = () => {
   const [input, setInput] = useState({
-    id: "",
+    accountId: "",
     password: "",
   });
 
@@ -16,6 +17,17 @@ const LoginPage = () => {
     });
   };
 
+  const onClick = () => {
+    axios
+      .post(`http://localhost:8080/auth/login`, input)
+      .then((res) => {
+        localStorage.setItem("accessToken", res.data.accessToken);
+        localStorage.setItem("refreshToken", res.data.refreshToken);
+        window.location.href = '/main';
+      })
+      .catch(() => alert("로그인이 실패하였습니다."));
+  };
+
   return (
     <LoginBackground>
       <LoginBlock>
@@ -25,8 +37,8 @@ const LoginPage = () => {
             <Input>
               <input
                 type="text"
-                name="id"
-                value={input.id}
+                name="accountId"
+                value={input.accountId}
                 onChange={onChange}
                 placeholder="아이디를 입력해주세요."
               />
@@ -46,7 +58,7 @@ const LoginPage = () => {
                 <SignUpText to="/findid">아이디 찾기</SignUpText>
                 <SignUpText to="/change">비밀번호 변경</SignUpText>
               </SignUpTextWrapper>
-              <SubmitButton>로그인</SubmitButton>
+              <SubmitButton onClick={onClick}>로그인</SubmitButton>
             </BottomWrapper>
           </LoginWrapper>
         </Login>

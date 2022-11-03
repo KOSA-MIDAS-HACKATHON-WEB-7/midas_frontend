@@ -1,5 +1,5 @@
 import Header from "../common/header/UserHeader";
-import FullCalendar from '@fullcalendar/react';
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -7,6 +7,9 @@ import { Character } from "../../assets";
 import styled from "styled-components";
 
 const Main = () => {
+  const handlerClick = () => {
+    const { scrollY } = window;
+  };
   return (
     <>
       <Header />
@@ -38,15 +41,15 @@ const Main = () => {
           />
         </Calendar>
         <Time>
-          <Title>이번 주 총 근무시간</Title>
+          <Title onClick={handlerClick}>이번 주 총 근무시간</Title>
           <Week>29/40 (단위:시간)</Week>
           <Today>
-            Today: <span>1시간 06분</span>
+            Today: <span>0시간 1분</span>
           </Today>
           <StateWrapper>
             현재상태: <State>미달</State>
           </StateWrapper>
-          <StartButton>시작</StartButton>
+          <StartButton>퇴근</StartButton>
         </Time>
       </Flex>
     </>
