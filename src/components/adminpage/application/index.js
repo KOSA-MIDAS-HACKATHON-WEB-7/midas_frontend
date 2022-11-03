@@ -1,10 +1,23 @@
 import styled from "styled-components";
 import { useState } from "react";
 import AdminHeader from "../../common/header/AdminHeader"
-import { Application } from "../../../constance/application";
 import ApplicationModal from "./applicationModal";
+import instance from "../../../instance";
 
 const AdminApplcation = () => {
+
+  const [data, setData] = useState([]);
+
+  useState(()=>{
+    instance.get('/admin/get-work-home')
+    .then((res)=>{
+      setData(res.data)
+    })
+    .catch((e)=>{
+      console.log(e)   
+    })
+  })
+
   const [modal, setModal] = useState(false);
   const [index, setIndex] = useState(0);
   const contents = [
@@ -25,7 +38,7 @@ const AdminApplcation = () => {
               <span key={i}>{e}</span>
             ))}
           </TableContents>
-          {Application.map((e, i) => (
+          {data.map((e, i) => (
             <div key={i}>
               <UserTable
                 onClick={() => {
@@ -33,11 +46,11 @@ const AdminApplcation = () => {
                   setIndex(i);
                 }}
               >
-                <span>{e.name}</span>
-                <span>{e.start}</span>
-                <span>{e.end}</span>
-                <span>{e.department}</span>
-                <span>{e.position}</span>
+                <span>{e.user.userName}</span>
+                <span>{e.startDate}</span>
+                <span>{e.endDate}</span>
+                <span>{e.user.department}</span>
+                <span>{e.user.position}</span>
               </UserTable>
               {modal && (
                 <ApplicationModal index={index} clickindex={i} values={e} setModal={setModal} />

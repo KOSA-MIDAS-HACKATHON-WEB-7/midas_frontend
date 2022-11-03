@@ -1,14 +1,49 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminHeader from "../../common/header/AdminHeader"
-import { User } from "../../../constance/user";
+import instance from "../../../instance";
 
 const CheckSignup = () => {
 
-    const confirmSignup = () => {
+    const confirmSignup = (id) => {
         const result = window.confirm("회원가입을 허용하시겠습니까? (취소시 허용 안함으로 간주)")
-        
+        if(result===true){
+          instance.put(`/admin/sign-up/accept/${id}`, {headers:{
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }})
+          .then((res)=>{
+            alert("승인 완료")
+          })
+          .catch((e)=>{
+            alert("승인 실패")
+            console.log(e)
+          })
+        }
+        else if(result === false){
+          instance.delete(`/admin/delete-signup-application/${id}`, {headers:{
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+          }})
+          .then((res)=>{
+            alert("삭제 성공")
+          })
+          .catch((e)=>{
+            console.log(e)
+            alert("삭제 실패")
+          })
+        }
     }
+
+    const [data, setData] = useState([]);
+    
+    useEffect(()=>{
+      instance.get('/admin/get-signup-list', 
+      {headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+      }})
+      .then((res)=>{
+        setData(res.data)
+      })
+    }, [])
 
   const contents = [
     "Name",
@@ -28,14 +63,14 @@ const CheckSignup = () => {
               <span key={i}>{e}</span>
             ))}
           </TableContents>
-          {User.map((e, i) => (
+          {data.map((e, i) => (
             <div key={i}>
               <UserTable>
-                <span>{e.name}</span>
+                <span>{e.userName}</span>
                 <span>{e.id}</span>
                 <span>{e.department}</span>
                 <span>{e.position}</span>
-                <ConfirmButton onClick={confirmSignup}>confirm</ConfirmButton>
+                <ConfirmButton onClick={()=> { confirmSignup(e.accountId) }}>confirm</ConfirmButton>
               </UserTable>
             </div>
           ))}
