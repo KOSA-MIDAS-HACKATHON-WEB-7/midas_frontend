@@ -3,11 +3,9 @@ import { useLayoutEffect, useState } from "react";
 import AdminModal from "./adminmodal";
 import AdminHeader from "../common/header/AdminHeader";
 import instance from '../../instance';
-import { useQueryClient, useMutation } from 'react-query'
 
 const AdminPage = () => {
 
-  const queryClient = useQueryClient();
   const [userList, setUserList] = useState([]);
 
   useLayoutEffect(()=>{

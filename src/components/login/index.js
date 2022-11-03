@@ -23,7 +23,7 @@ const LoginPage = () => {
       .then((res) => {
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
-        window.location.href = '/main';
+        window.location.href = "/main"
       })
       .catch(() => alert("로그인이 실패하였습니다."));
   };
