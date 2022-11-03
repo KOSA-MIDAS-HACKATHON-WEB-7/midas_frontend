@@ -5,6 +5,7 @@ import SingupPage from "./components/signup/singup";
 import Main from "./components/main";
 import StyleProvider from "./style";
 import Application from "./components/applicaton";
+import Mypage from "./components/mypage";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/main" element={<Main />} />
           <Route path="/application" element={<Application/>} />
+          <Route path="/mypage" element={<Mypage/>} />
         </Routes>
       </BrowserRouter>
     </StyleProvider>

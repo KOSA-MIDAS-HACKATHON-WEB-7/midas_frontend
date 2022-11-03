@@ -9,10 +9,10 @@ const Header = () => {
         <Logo src={MainLogo} alt="로고" />
         <LogoText>기관지</LogoText>
       </LogoWrapper>
-      <ProfileWrapper>
-        <NavWrapper>
-          <HomeWorking to="/application">재택근무 신청</HomeWorking>
-        </NavWrapper>
+      <NavWrapper>
+        <HomeWorking to="/application">재택근무 신청</HomeWorking>
+      </NavWrapper>
+      <ProfileWrapper to="/mypage">
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
         </ProfileImgWrapper>
@@ -41,12 +41,13 @@ const ProfileImgWrapper = styled.div`
   border-radius: 100px;
 `;
 
-const ProfileWrapper = styled.div`
-  width: 500px;
+const ProfileWrapper = styled(Link)`
+  width: 100px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-right: 100px;
+  text-decoration: none;
 `;
 
 const HeaderBackGround = styled.div`
@@ -83,7 +84,8 @@ const LogoWrapper = styled.div`
 `;
 
 const NavWrapper = styled.div`
-  width: 80%;
+  width: 150px;
+  margin-left: 70em;
 `
 
 const HomeWorking = styled(Link)`
