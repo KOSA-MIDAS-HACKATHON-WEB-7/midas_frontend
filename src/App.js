@@ -4,6 +4,7 @@ import LoginPage from "./components/login";
 import SingupPage from "./components/signup/singup";
 import Main from "./components/main";
 import StyleProvider from "./style";
+import Application from "./components/applicaton";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/signup" element={<SingupPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/main" element={<Main />} />
+          <Route path="/application" element={<Application/>} />
         </Routes>
       </BrowserRouter>
     </StyleProvider>

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { AboutImage } from "../../assets";
 
 const About = () => {  
     const nav = useNavigate()
@@ -7,7 +8,7 @@ const About = () => {
     return(
         <AboutRoot>
             <ImageContainer>
-                <img src="/image1.png" alt="icon" />
+                <img src={AboutImage} alt="icon" />
             </ImageContainer>
             <InfoContainer>
                 <Title>유연 근무제란?</Title>
