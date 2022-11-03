@@ -10,7 +10,7 @@ const AdminHeader = () => {
         <LogoText>기관지</LogoText>
       </LogoWrapper>
       <NavWrapper>
-        <Link to="/admin/workers">Workers</Link>
+        <Link to="/admin">Workers</Link>
         <Link to="/admin/application">Application</Link>
         <Link to="/admin/signup">Signup</Link>
       </NavWrapper>
