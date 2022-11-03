@@ -1,12 +1,17 @@
 import styled from "styled-components";
 
 const ApplicationList = ({ start, end, state }) => {
+
+    const myDelete = () => {
+        const result = window.confirm('삭제하시겠습니까?')
+    }  
+
     return(
         <ListWrapper>
             <Date>{start} ~ {end}</Date>
             <Manage>
                 <Modify>수정</Modify>
-                <Delete>삭제</Delete>
+                <Delete onClick={myDelete}>삭제</Delete>
                 <State state={state}>
                     <span>{state}</span>
                 </State>
@@ -115,6 +120,8 @@ const State = styled.span`
             }   
         }};
         color: white;
+        transform: scale(1.1);
+        font-weight: bold;
     }
 `
 

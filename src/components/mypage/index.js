@@ -1,11 +1,26 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components"
 import { Profile } from "../../assets";
 import Header from "../common/header";
 import ApplicationList from "./applicationList";
+import DeleteModal from "./deleteModal";
 
 const Mypage = () => {
+
+    const [modal, setModal] = useState(false);
+
+    useEffect(() => {
+        if (modal) {
+            window.scrollTo(0, 0)
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset"
+        }
+    }, [modal]);
+
     return(
         <>
+            {modal && <DeleteModal setModal={setModal} />}
             <Header/>
             <UserWrapper>
                 <UserInfo>
@@ -16,7 +31,7 @@ const Mypage = () => {
                         <Dept>직책</Dept>
                     </Info>
                 </UserInfo>
-                <ChangePassword>비밀번호 변경</ChangePassword>
+                <ChangePassword onClick={() => setModal((prev)=> !prev)}>비밀번호 변경</ChangePassword>
                 <HomeWorkingCheck>
                     <Text>재택근무 확인</Text>
                     <List>
