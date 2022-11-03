@@ -100,10 +100,30 @@ const Time = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   position: relative;
-  top: 50%;
+  top: 30%;
   margin-left: 150px;
-  transform: translate(0%, -50%);
   text-align: center;
+  @keyframes slideUp {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-5%);
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-5%);
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+  animation: slideDown 0.4s;
+  :hover {
+    animation: slideUp 0.4s;
+    animation-fill-mode: forwards;
+  }
 `;
 
 const Flex = styled.div`

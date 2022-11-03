@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const ChangePassword = () => {
+  const [inputs, setInputs] = useState({
+    
+  })
   return (
     <LoginBackground>
       <LoginBlock>

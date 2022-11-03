@@ -16,7 +16,7 @@ const Header = () => {
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
         </ProfileImgWrapper>
-        <NameText>아무거</NameText>
+        <NameText>김경호</NameText>
       </ProfileWrapper>
     </HeaderBackGround>
   );
@@ -69,7 +69,7 @@ const Logo = styled.img`
 
 const LogoText = styled.span`
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 20px;
   line-height: 27px;
   letter-spacing: -0.017em;

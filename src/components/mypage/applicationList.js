@@ -13,7 +13,7 @@ const ApplicationList = ({ start, end, state }) => {
       <Manage>
         <Modify>수정</Modify>
         <Delete onClick={myDelete}>삭제</Delete>
-        <State state={state}>
+        <State onClick={() => alert(state + " 상태입니다.")} state={state}>
           <span>{state}</span>
         </State>
       </Manage>

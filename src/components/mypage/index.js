@@ -23,18 +23,20 @@ const Mypage = () => {
       <Header />
       <UserWrapper>
         <UserInfo>
-          <img src={Profile} alt="icon" />
+          <ImgWrapper>
+            <Img src={Profile} alt="icon" />
+          </ImgWrapper>
           <Info>
-            <p>이름값</p>
+            <p>김경호</p>
             <Company>마이다스IT</Company>
-            <Dept>직책</Dept>
+            <Dept>Frontend Developer</Dept>
           </Info>
         </UserInfo>
         <ChangePassword onClick={() => setModal((prev) => !prev)}>
-          비밀번호 변경
+          비밀번호 변경하기
         </ChangePassword>
         <HomeWorkingCheck>
-          <Text>재택근무 확인</Text>
+          <Text>재택근무 확인하기</Text>
           <List>
             <ApplicationList
               start={"2022.10.31"}
@@ -58,6 +60,22 @@ const Mypage = () => {
   );
 };
 
+const ImgWrapper = styled.div`
+  width: 100px;
+  height: 100px;
+  background: #fdfdfd;
+  border: 0.5px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+`;
+
+const Img = styled.img`
+  width: 50px;
+  height: 50px;
+`;
+
 const UserWrapper = styled.div`
   width: 800px;
   margin: 0 auto;
@@ -74,13 +92,6 @@ const UserInfo = styled.div`
   padding-bottom: 50px;
   padding-left: 80px;
   border-bottom: 3px solid #999999;
-  img {
-    width: 100px;
-    height: 100px;
-    border: 2px solid black;
-    border-radius: 50%;
-    padding: 10px;
-  }
 `;
 
 const Info = styled.p`
@@ -107,6 +118,7 @@ const Dept = styled.span`
   font-size: 16px;
   line-height: 22px;
   margin-left: 20px;
+  color: #aba6ea;
 `;
 
 const ChangePassword = styled.button`
@@ -120,13 +132,30 @@ const ChangePassword = styled.button`
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 700;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 44px;
   text-align: left;
   padding-left: 40px;
-  animation: sizedown;
-  &:hover {
-    transform: scale(1.05);
+  @keyframes sizeup {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+  @keyframes sizedown {
+    0% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation: sizedown 0.4s;
+  :hover {
+    animation: sizeup 0.4s;
+    animation-fill-mode: forwards;
   }
 `;
 
