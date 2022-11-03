@@ -21,11 +21,17 @@ const Main = () => {
       inline: "nearest",
     });
   }, []);
-  console.log(userinfo.id);
+  const [startHour, setStartHour] = useState(0);
+  const [startMin, setStartMin] = useState(0);
+  const [endHour, setEndHour] = useState(0);
+  const [endMin, setEndMin] = useState(0);
   const timefunc = () => {
     const date = new Date();
-    const time = date.getHours() + ":" + date.getMinutes();
+    const hour = date.getHours();
+    const min = date.getMinutes();
     if (!state) {
+      setStartHour(hour);
+      setStartMin(min);
       instance
         .post(
           "/api/officehour/start-work",
@@ -39,10 +45,13 @@ const Main = () => {
           }
         )
         .then((res) => {
-          console.log(res.data);
+          console.log(res);
         })
         .catch((err) => console.error(err));
     } else {
+      setEndHour(hour);
+      setEndMin(min);
+      
       instance
         .post(
           "/api/officehour/end-work",
@@ -95,12 +104,12 @@ const Main = () => {
         </Calendar>
         <Time>
           <Title>이번 주 총 근무시간</Title>
-          <Week>29/40 (단위:시간)</Week>
+          <Week>29/40(시간)</Week>
           <Today>
-            Today: <span>0시간 1분</span>
+            Today: <span>0시간 0분</span>
           </Today>
           <StateWrapper>
-            현재상태: <State>미달</State>
+            현재상태: <State>미달 (8시간 00분)</State>
           </StateWrapper>
           <StartButton
             onClick={() => {

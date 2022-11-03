@@ -7,6 +7,7 @@ const ApplicationList = () => {
   const [endDate, setEndDate] = useState(0);
   const [reason, setReason] = useState();
   const [state, setState] = useState();
+  
   useEffect(() => {
     instance
       .post(`/api/user/check-work-home`, {
