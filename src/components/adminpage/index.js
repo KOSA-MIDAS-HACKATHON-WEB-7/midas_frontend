@@ -27,9 +27,8 @@ const AdminPage = () => {
             ))}
           </TableContents>
           {User.map((e, i) => (
-            <>
+            <div key={i}>
               <UserTable
-                key={i}
                 onClick={() => {
                   setModal(true);
                   setIndex(i);
@@ -45,7 +44,7 @@ const AdminPage = () => {
               {modal && (
                 <AdminModal index={index} clickindex={i} values={e} setModal={setModal} />
               )}
-            </>
+            </div>
           ))}
         </Information>
       </InformationWrapper>
