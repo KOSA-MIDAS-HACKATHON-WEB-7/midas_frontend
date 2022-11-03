@@ -5,10 +5,15 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { Character } from "../../assets";
 import styled from "styled-components";
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useState } from "react";
+import instance from "../../instance";
+import { useRecoilValue } from "recoil";
+import { user } from "../../recoil/atom";
 
 const Main = () => {
   const scrollRef = useRef(null);
+  const [state, setState] = useState(false);
+  const userinfo = useRecoilValue(user);
   const handlerClick = useCallback(() => {
     scrollRef.current.scrollIntoView({
       behavior: "smooth",
@@ -16,6 +21,46 @@ const Main = () => {
       inline: "nearest",
     });
   }, []);
+  console.log(userinfo.id);
+  const timefunc = () => {
+    const date = new Date();
+    const time = date.getHours() + ":" + date.getMinutes();
+    if (!state) {
+      instance
+        .post(
+          "/api/officehour/start-work",
+          {
+            userId: 11,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      instance
+        .post(
+          "/api/officehour/end-work",
+          {
+            userId: 11,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.error(err));
+    }
+  };
   return (
     <>
       <Header />
@@ -57,7 +102,18 @@ const Main = () => {
           <StateWrapper>
             현재상태: <State>미달</State>
           </StateWrapper>
-          <StartButton>퇴근</StartButton>
+          <StartButton
+            onClick={() => {
+              if (window.confirm(`${state ? "퇴근" : "출근"}하시겠습니까?`)) {
+                setState(!state);
+                timefunc();
+              } else {
+                alert("다시 시도해주세요.");
+              }
+            }}
+          >
+            {state ? "퇴근" : "출근"}
+          </StartButton>
         </Time>
       </Flex>
     </>
