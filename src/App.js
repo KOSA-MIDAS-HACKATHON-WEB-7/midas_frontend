@@ -1,11 +1,11 @@
-import UserRotuer from "./router/UserRouter";
+import UserRouter from "./router/UserRouter";
 import AdminRouter from "./router/AdminRouter";
 import StyleProvider from "./style";
 
 const App = () => {
   return (
     <StyleProvider>
-      <UserRotuer />
+      <UserRouter />
       <AdminRouter />
     </StyleProvider>
   );

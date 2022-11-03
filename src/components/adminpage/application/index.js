@@ -1,32 +1,31 @@
 import styled from "styled-components";
-import { User } from "../../constance/user";
 import { useState } from "react";
-import AdminModal from "./adminmodal";
-import AdminHeader from "../common/header/AdminHeader";
+import AdminHeader from "../../common/header/AdminHeader"
+import { Application } from "../../../constance/application";
+import ApplicationModal from "./applicationModal";
 
-const AdminPage = () => {
+const AdminApplcation = () => {
   const [modal, setModal] = useState(false);
   const [index, setIndex] = useState(0);
   const contents = [
     "Name",
-    "ID",
-    "Password",
-    "Department",
+    "Start",
+    "End",
+    "Dept",
     "Position",
-    "Working",
   ];
   return (
     <>
       <AdminHeader />
       <InformationWrapper>
         <Information>
-          <AdminTitle>Workers List</AdminTitle>
+          <AdminTitle>Application List</AdminTitle>
           <TableContents>
             {contents.map((e, i) => (
               <span key={i}>{e}</span>
             ))}
           </TableContents>
-          {User.map((e, i) => (
+          {Application.map((e, i) => (
             <div key={i}>
               <UserTable
                 onClick={() => {
@@ -35,14 +34,13 @@ const AdminPage = () => {
                 }}
               >
                 <span>{e.name}</span>
-                <span>{e.id}</span>
-                <span>{e.password}</span>
+                <span>{e.start}</span>
+                <span>{e.end}</span>
                 <span>{e.department}</span>
                 <span>{e.position}</span>
-                <Working working={e.working}>{e.working}</Working>
               </UserTable>
               {modal && (
-                <AdminModal index={index} clickindex={i} values={e} setModal={setModal} />
+                <ApplicationModal index={index} clickindex={i} values={e} setModal={setModal} />
               )}
             </div>
           ))}
@@ -52,9 +50,6 @@ const AdminPage = () => {
   );
 };
 
-const Working = styled.span`
-  color: ${(props) => (props.working === "Company" ? "#53DC19" : "#E03131")};
-`;
 
 const UserTable = styled.div`
   height: 50px;
@@ -72,6 +67,8 @@ const UserTable = styled.div`
     line-height: 22px;
     letter-spacing: -0.017em;
     color: #000000;
+    max-width: 100px;
+    overflow: hidden;
   }
 `;
 
@@ -115,4 +112,4 @@ const AdminTitle = styled.span`
   margin: 150px 0 50px 0;
 `;
 
-export default AdminPage;
+export default AdminApplcation;

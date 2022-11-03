@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components"
 import { Profile } from "../../assets";
-import Header from "../common/header";
+import Header from "../common/header/UserHeader";
 import ApplicationList from "./applicationList";
 import DeleteModal from "./deleteModal";
 

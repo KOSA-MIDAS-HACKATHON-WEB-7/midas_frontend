@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import { MainLogo, Profile } from "../../../assets";
+import { MainLogo, Profile } from "../../../../assets";
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const UserHeader = () => {
   return (
     <HeaderBackGround>
       <LogoWrapper>
@@ -98,4 +98,4 @@ const HomeWorking = styled(Link)`
   text-decoration: none;
 `
 
-export default Header;
+export default UserHeader;
