@@ -1,17 +1,35 @@
 import styled from "styled-components";
-import { User } from "../../constance/user";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import AdminModal from "./adminmodal";
 import AdminHeader from "../common/header/AdminHeader";
+import instance from '../../instance';
+import { useQueryClient, useMutation } from 'react-query'
 
 const AdminPage = () => {
+
+  const queryClient = useQueryClient();
+  const [userList, setUserList] = useState([]);
+
+  useLayoutEffect(()=>{
+    instance.get('/api/user')
+    .then((res)=>{
+      setUserList(res.data)
+    })
+    .catch((e)=>{
+      console.log(e)
+    })
+  }, [])
+
+  
+
   const [modal, setModal] = useState(false);
   const [index, setIndex] = useState(0);
   const contents = [
     "Name",
     "ID",
-    "Password",
-    "Dept",
+    "Start",
+    "End",
+    "Dept", 
     "Position",
     "Working",
   ];
@@ -26,7 +44,7 @@ const AdminPage = () => {
               <span key={i}>{e}</span>
             ))}
           </TableContents>
-          {User.map((e, i) => (
+          {userList.map((e, i) => (
             <div key={i}>
               <UserTable
                 onClick={() => {
@@ -34,12 +52,13 @@ const AdminPage = () => {
                   setIndex(i);
                 }}
               >
-                <span>{e.name}</span>
-                <span>{e.id}</span>
-                <span>{e.password}</span>
+                <span>{e.userName}</span>
+                <span>{e.accountId}</span>
+                <span>{e.coreTimeStart}</span>
+                <span>{e.coreTimeEnd}</span>
                 <span>{e.department}</span>
                 <span>{e.position}</span>
-                <Working working={e.working}>{e.working}</Working>
+                <Working working={e.workWhere}>{e.workWhere}</Working> 
               </UserTable>
               {modal && (
                 <AdminModal index={index} clickindex={i} values={e} setModal={setModal} />
@@ -60,9 +79,10 @@ const UserTable = styled.div`
   height: 50px;
   background: #fdfdfd;
   border: 0.5px solid #000000;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   align-items: center;
+  justify-items: center;
   cursor: pointer;
   span {
     font-family: "Noto Sans";
@@ -78,9 +98,10 @@ const UserTable = styled.div`
 const TableContents = styled.div`
   width: 1100px;
   height: 50px;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   align-items: center;
+  justify-items: center;
   background: #aba6ea;
   color: white;
   font-style: normal;

@@ -5,11 +5,7 @@ const ValueInformation = ({ values }) => {
     <>
       <ValueItems>
         <ValueTitle>ID</ValueTitle>
-        <ValueText>{values.id}</ValueText>
-      </ValueItems>
-      <ValueItems>
-        <ValueTitle>Password</ValueTitle>
-        <ValueText>{values.password}</ValueText>
+        <ValueText>{values.accountId}</ValueText>
       </ValueItems>
       <ValueItems>
         <ValueTitle>Department</ValueTitle>
@@ -21,17 +17,15 @@ const ValueInformation = ({ values }) => {
       </ValueItems>
       <ValueItems>
         <ValueTitle>Working</ValueTitle>
-        <ValueText>{values.working}</ValueText>
+        <ValueText>{values.workWhere}</ValueText>
       </ValueItems>
       <ValueItems>
-        <ValueTitle>Core Time</ValueTitle>
-        <ValueText>
-          {values.coretime.map((v, i) => (
-            <span key={i} style={{ marginRight: "5px" }}>
-              {v} {i === 0 ? " ~ " : null}
-            </span>
-          ))}
-        </ValueText>
+        <ValueTitle>Core Start Time</ValueTitle>
+        <ValueText>{values.coreTimeStart}</ValueText>
+      </ValueItems>
+      <ValueItems>
+        <ValueTitle>Core Start Time</ValueTitle>
+        <ValueText>{values.coreTimeEnd}</ValueText>
       </ValueItems>
     </>
   );

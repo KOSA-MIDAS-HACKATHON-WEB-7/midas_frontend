@@ -1,35 +1,37 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const ModifyInformation = ({ values }) => {
+const ModifyInformation = ({ values, onClick }) => {
   const [inputValue, setInputValue] = useState({
-    id: values.id,
-    password: values.password,
+    accountId: values.accountId,
+    password: "",
     department: values.department,
     position: values.position,
-    working: values.working,
+    coreTimeStart: values.coreTimeStart,
+    coreTimeEnd: values.coreTimeEnd,
+    workWhere: values.workWhere,
   });
-  const [firstCoreTime, setFirstCoreTime] = useState(values.coretime[0]);
-  const [secondCoreTime, setSecondCoreTime] = useState(values.coretime[1]);
-  const { id, password, department, position, working } = inputValue;
+  
   const onChange = (e) => {
     const { value, name } = e.target;
+    console.log(value)
     setInputValue({
       ...inputValue,
       [name]: value,
     });
   };
+
   return (
     <>
       <ValueItems>
         <ValueTitle>ID</ValueTitle>
         <InputWrapper>
           <input
-            type="id"
-            placeholder="Type ID"
+            type="text"
+            placeholder="ID"
             onChange={onChange}
-            value={id}
-            name="id"
+            value={inputValue.accountId}
+            name="accountId"
           />
         </InputWrapper>
       </ValueItems>
@@ -37,22 +39,22 @@ const ModifyInformation = ({ values }) => {
         <ValueTitle>Password</ValueTitle>
         <InputWrapper>
           <input
-            type="text"
-            placeholder="Type Password"
+            type="password"
+            placeholder="Password"
             onChange={onChange}
-            value={password}
+            value={inputValue.password}
             name="password"
           />
         </InputWrapper>
       </ValueItems>
       <ValueItems>
-        <ValueTitle>Department</ValueTitle>
+        <ValueTitle>Dept</ValueTitle>
         <InputWrapper>
           <input
             type="text"
             placeholder="Type Department"
             onChange={onChange}
-            value={department}
+            value={inputValue.department}
             name="department"
           />
         </InputWrapper>
@@ -64,42 +66,28 @@ const ModifyInformation = ({ values }) => {
             type="text"
             placeholder="Type Position"
             onChange={onChange}
-            value={position}
+            value={inputValue.position}
             name="position"
           />
         </InputWrapper>
       </ValueItems>
-      <ValueItems>
-        <ValueTitle>Working</ValueTitle>
-        <InputWrapper>
-          <input
-            type="text"
-            placeholder="Type Working"
-            onChange={onChange}
-            value={working}
-            name="working"
-          />
-        </InputWrapper>
-      </ValueItems>
-      <ValueItems>
-        <ValueTitle>Core Time</ValueTitle>
-        <input
-          type="time"
-          onChange={(e) => setFirstCoreTime(e.target.value)}
-          value={firstCoreTime}
-          name="coretime"
-        />
-        <span>~</span>
-        <input
-          type="time"
-          onChange={(e) => setSecondCoreTime(e.target.value)}
-          value={secondCoreTime}
-          name="coretime"
-        />
-      </ValueItems>
+      <Button onClick={() => onClick(inputValue)}>Check</Button>
     </>
   );
 };
+
+const Button = styled.div`
+  margin-left: 20em;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 40px;
+  background-color: #ABA6EA;
+  color: white;
+  margin-top: 30px;
+`
 
 const InputWrapper = styled.div`
   width: 325px;
@@ -130,6 +118,7 @@ const ValueItems = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 `;
 
 const ValueTitle = styled.span`

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import ModifyInformation from "../modifyinformation";
 import ValueInformation from "../valueinformation";
+import instance from "../../../instance";
 
 const AdminModal = ({ index, clickindex, values, setModal }) => {
   const [modify, setModify] = useState(false);
@@ -10,6 +11,22 @@ const AdminModal = ({ index, clickindex, values, setModal }) => {
   }, []);
   const closeModal = () => setModal(false);
 
+  const modifyFunc = (data) => {
+    console.log(data)
+    instance.put('/admin/user-info', {
+      accountId: data.accountId,
+      position: data.position,
+      department: data.department,
+      newAccountId: data.accountId
+    }, { headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    }})
+    .catch((e)=>{
+      alert("수정 실패")
+      console.log(e);
+    })
+  }
+
   if (index !== clickindex) {
     return;
   }
@@ -17,7 +34,7 @@ const AdminModal = ({ index, clickindex, values, setModal }) => {
     <ModalBackground onClick={closeModal}>
       <ModalItems onClick={(e) => e.stopPropagation()}>
         <ValueWrapper>
-          <UserName>{values.name}</UserName>
+          <UserName>{values.userName}</UserName>
           <Flexend>
             <ModifyBtn onClick={() => setModify(!modify)}>
               {modify ? "Done" : "Modify"}
@@ -25,7 +42,7 @@ const AdminModal = ({ index, clickindex, values, setModal }) => {
           </Flexend>
           <Wrapper>
             {modify ? (
-              <ModifyInformation values={values} />
+              <ModifyInformation values={values} onClick={modifyFunc} />
             ) : (
               <ValueInformation values={values} />
             )}
@@ -54,7 +71,7 @@ const CheckButton = styled.button`
 const Wrapper = styled.div`
   width: 300px;
   height: 350px;
-  margin-top: 100px;
+  margin-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
