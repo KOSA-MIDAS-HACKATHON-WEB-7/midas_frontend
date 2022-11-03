@@ -4,14 +4,13 @@ import { AboutImage } from "../../assets";
 
 const About = () => {
   const nav = useNavigate();
-
   return (
     <AboutRoot>
       <ImageContainer>
         <img src={AboutImage} alt="icon" />
       </ImageContainer>
       <InfoContainer>
-        <Title>유연 근무제란?</Title>
+        <Title>유연 근무제란 무엇일까?</Title>
         <Explain>
           <Definition>
             유연근무제란 통상의 근무시간·근무일을 변경하거나 근로자와 사용자가
@@ -75,6 +74,7 @@ const Definition = styled.p`
   color: #808080;
   font-size: 25px;
   max-width: 660px;
+  font-weight: 600;
   margin-top: 120px;
 `;
 
@@ -82,12 +82,41 @@ const Back = styled.p`
   margin-top: 100px;
   font-size: 20px;
   cursor: pointer;
+  background: #aba6ea;
+  padding: 10px 30px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  @keyframes sizeup {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
+  }
+  @keyframes sizedown {
+    0% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  animation: sizedown 0.4s;
+  :hover {
+    animation: sizeup 0.4s;
+    animation-fill-mode: forwards;
+  }
 `;
 
 const MoreInfo = styled.p`
-  font-size: 20px;
-  margin-top: 60px;
+  font-size: 16px;
+  margin-top: 30px;
   cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export default About;
