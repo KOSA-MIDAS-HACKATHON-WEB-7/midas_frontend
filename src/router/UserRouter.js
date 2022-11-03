@@ -8,7 +8,7 @@ import Mypage from "../components/mypage";
 import ChangePassword from "../components/changePassword";
 import FindId from "../components/findId";
 
-const UserRotuer = () => {
+const UserRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -25,4 +25,4 @@ const UserRotuer = () => {
   );
 };
 
-export default UserRotuer;
+export default UserRouter;
