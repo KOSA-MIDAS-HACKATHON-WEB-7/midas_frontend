@@ -32,7 +32,7 @@ const Application = () => {
       .post(`http://localhost:8080/api/user/work-home/application`, {
         ...input,
         id: null,
-        userId: 4,
+        userId: 11,
       })
       .then((res) => {
         console.log(res);

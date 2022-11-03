@@ -2,41 +2,40 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import instance from "../../instance";
 
-const ApplicationList = ({ onClick }) => {
-  const [input, setInput] = useState({
-    startDate: 0,
-    endDate: 0,
-    reason: "",
-  });
+const ApplicationList = () => {
+  const [startDate, setStartDate] = useState(0);
+  const [endDate, setEndDate] = useState(0);
+  const [reason, setReason] = useState();
   const [state, setState] = useState();
   useEffect(() => {
     instance
       .post(`/api/user/check-work-home`, {
-        userId: 2,
+        userId: 11,
       })
       .then((res) => {
-        const { name, value } = res.data;
-        console.log(res.data);
-        setInput((prev) => ({
-          ...prev,
-          [name]: value,
-        }));
+        setStartDate(res.data.startDate);
+        setReason(res.data.reason);
+        setEndDate(res.data.endDate);
         setState(res.data.recruitment);
         console.log(res.data);
       })
       .catch((err) => console.error(err));
   }, []);
   return (
-    <ListWrapper onClick={onClick}>
+    <ListWrapper>
       <Date>
-        <span name="startDate">{input.startDate}</span> ~ <span name="endDate">{input.endDate}</span>
+        <span name="startDate">{startDate}</span> ~{" "}
+        <span name="endDate">{endDate}</span>
       </Date>
       <ReasonWrapper>
         <ReasonTitle>사유</ReasonTitle>
-        <ReasonText name="reason">{input.reason}</ReasonText>
+        <ReasonText name="reason">{reason}</ReasonText>
       </ReasonWrapper>
       <Manage>
-        <State onClick={() => alert(state + " 상태입니다.")} state={state}>
+        <State
+          onClick={() => alert(state ? "승인 상태입니다." : "거절 상태입니다.")}
+          state={state}
+        >
           <span>{state ? "승인" : "거절"}</span>
         </State>
       </Manage>
