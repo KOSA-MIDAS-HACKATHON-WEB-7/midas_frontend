@@ -11,7 +11,7 @@ const Header = () => {
       </LogoWrapper>
       <ProfileWrapper>
         <NavWrapper>
-          
+          <HomeWorking to="/application">재택근무 신청</HomeWorking>
         </NavWrapper>
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
@@ -42,7 +42,7 @@ const ProfileImgWrapper = styled.div`
 `;
 
 const ProfileWrapper = styled.div`
-  width: 100px;
+  width: 500px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -83,11 +83,17 @@ const LogoWrapper = styled.div`
 `;
 
 const NavWrapper = styled.div`
-
+  width: 80%;
 `
 
 const HomeWorking = styled(Link)`
-
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+  color: #000000;
+  text-decoration: none;
 `
 
 export default Header;
