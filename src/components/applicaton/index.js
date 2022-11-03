@@ -1,8 +1,44 @@
 import styled from "styled-components";
 import { ApplicationImage } from "../../assets";
 import Header from "../common/header/UserHeader";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Application = () => {
+  const nav = useNavigate();
+  const [input, setInput] = useState({
+    startDate: 0,
+    endDate: 0,
+    reason: "",
+  });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const onClick = () => {
+    if (input.reason === "") {
+      alert("사유를 적어주세요");
+      return;
+    }
+    axios
+      .post(`http://localhost:8080/api/user/work-home/application`, {
+        ...input,
+        id: null,
+        userId: 2,
+      })
+      .then((res) => {
+        console.log(res);
+        nav(-1);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("오류 발생");
+      });
+  };
   return (
     <>
       <Header />
@@ -15,19 +51,34 @@ const Application = () => {
           <InputWrapper>
             <Input>
               <p>시작일</p>
-              <input type="date" />
+              <input
+                value={input.startDate}
+                onChange={onChange}
+                name="startDate"
+                type="date"
+              />
             </Input>
             <span>~</span>
             <Input>
               <p>종료일</p>
-              <input type="date" />
+              <input
+                value={input.endDate}
+                onChange={onChange}
+                name="endDate"
+                type="date"
+              />
             </Input>
           </InputWrapper>
           <Reason>
             <p>재택 사유</p>
-            <textarea placeholder="사유를 입력해주세요" />
+            <textarea
+              value={input.reason}
+              onChange={onChange}
+              name="reason"
+              placeholder="사유를 입력해주세요"
+            />
           </Reason>
-          <Submit>신청</Submit>
+          <Submit onClick={onClick}>신청</Submit>
         </Form>
       </Flex>
     </>
