@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { user } from "../../recoil/atom";
 
 const DeleteModal = ({ setModal }) => {
+  const userinfo = useRecoilValue(user);
   const [input, setInput] = useState({
     beforePassword: "",
     afterPassword: "",
@@ -22,7 +25,7 @@ const DeleteModal = ({ setModal }) => {
     }
     axios
       .put(`http://localhost:8080/auth/update-password-mypage`, {
-        accountId: "asdfq",
+        accountId: userinfo.accountId,
         ...input,
       })
       .then((res) => {
