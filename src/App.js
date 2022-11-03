@@ -7,7 +7,6 @@ import { useSetRecoilState } from "recoil";
 import { user } from "./recoil/atom";
 
 const App = () => {
-
   const setUserinfo = useSetRecoilState(user);
 
   useEffect(()=>{

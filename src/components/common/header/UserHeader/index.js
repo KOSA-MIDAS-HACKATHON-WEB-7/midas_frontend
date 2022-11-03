@@ -7,7 +7,6 @@ import { user } from "../../../../recoil/atom";
 const UserHeader = () => {
 
   const userinfo = useRecoilValue(user);
-
   return (
     <HeaderBackGround>
       <LogoWrapper to="/main">

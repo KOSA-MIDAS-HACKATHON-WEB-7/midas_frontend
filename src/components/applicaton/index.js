@@ -7,7 +7,6 @@ import { useRecoilValue } from "recoil";
 import { user } from "../../recoil/atom";
 import instance from "../../instance";
 
-
 const Application = () => {
   const nav = useNavigate();
   const userinfo = useRecoilValue(user);
