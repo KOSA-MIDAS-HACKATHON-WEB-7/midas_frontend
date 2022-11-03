@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import instance from "../../instance";
 
 const SingupPage = () => {
 
   const [input, setInput] = useState({
     email: "",
     code: "",
-    id: "",
+    accountId: "",
     password: "",
-    name: "",
+    userName: "",
     dept: "",
     position: ""
   })
+
+  const [able, setAble] = useState(true)
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -22,29 +25,80 @@ const SingupPage = () => {
     });
   }
 
+  const authEmail = () => {
+    instance.post('/api/user/sign-up/email-auth', {
+      name: input.userName,
+      email: input.email
+    })
+    .then((res)=>{
+      alert("메일을 확인해주세요.")
+    })
+    .catch((e)=>{
+      alert("오류 발생")
+      console.log(e)
+    })
+  }
+
+  const authCode = () => {
+    instance.post('/api/user/sign-up/check-auth-code', {
+      email: input.email,
+      code: input.code
+    })
+    .then((res)=>{
+      setAble(false)
+    })
+    .catch((e)=>{
+      console.log(e)
+      alert('오류 발생')
+    })
+  }
+
+  const signup = () => {
+    instance.post('/auth/sign-up', {
+      email: input.email,
+      accountId: input.accountId,
+      password: input.password,
+      userName: input.userName,
+      department: input.dept,
+      position: input.position,
+      role: "USER"
+    })
+    .then((res)=>{
+      alert("회원가입이 성공적으로 완료되었습니다.")
+      window.location.href = "/";
+    })
+    .catch((e)=>{
+      alert('오류 발생')
+      console.log(e)
+    })
+  }
+
   return (
     <LoginBackground>
       <LoginBlock>
         <Login>
           <LoginWrapper>
             <Title>회원가입</Title>
+            <Input>
+              <input type="text" name="userName" value={input.userName} onChange={onChange} placeholder="이름을 입력해주세요." />
+            </Input>
             <EmailInput>
               <input type="email" name="email" value={input.email} onChange={onChange} placeholder="이메일을을 입력해주세요." />
               <Auth>
-                <span>인증요청</span>
+                <span onClick={authEmail}>인증요청</span>
+              </Auth>
+            </EmailInput>
+            <EmailInput>
+              <input type="text" name="code" value={input.code} onChange={onChange} placeholder="인증번호를 입력해주세요." />
+              <Auth>
+                <span onClick={authCode}>확인</span>
               </Auth>
             </EmailInput>
             <Input>
-              <input type="text" name="code" value={input.code} onChange={onChange} placeholder="인증번호를 입력해주세요." />
-            </Input>
-            <Input>
-              <input type="text" name="id" value={input.id} onChange={onChange} placeholder="아이디를 입력해주세요." />
+              <input type="text" name="accountId" value={input.accountId} onChange={onChange} placeholder="아이디를 입력해주세요." />
             </Input>
             <Input>
               <input type="password" name="password" value={input.password} onChange={onChange} placeholder="비밀번호를 입력해주세요." />
-            </Input>
-            <Input>
-              <input type="text" name="name" value={input.name} onChange={onChange} placeholder="이름을 입력해주세요." />
             </Input>
             <Input>
               <input type="text" name="dept" value={input.dept} onChange={onChange} placeholder="부서를 입력해주세요." />
@@ -53,7 +107,7 @@ const SingupPage = () => {
               <input type="text" name="position" value={input.position} onChange={onChange} placeholder="직책을 입력해주세요." />
             </Input>
           </LoginWrapper>
-          <SignupButton>회원가입</SignupButton>
+          <SignupButton onClick={signup} disabled={able}>회원가입</SignupButton>
         </Login>
         <Introduce>
           <IntroduceWrapper>

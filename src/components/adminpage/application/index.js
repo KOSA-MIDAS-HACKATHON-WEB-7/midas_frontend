@@ -55,9 +55,10 @@ const UserTable = styled.div`
   height: 50px;
   background: #fdfdfd;
   border: 0.5px solid #000000;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
+  justify-items: center;
   cursor: pointer;
   span {
     font-family: "Noto Sans";
@@ -67,17 +68,16 @@ const UserTable = styled.div`
     line-height: 22px;
     letter-spacing: -0.017em;
     color: #000000;
-    max-width: 100px;
-    overflow: hidden;
   }
 `;
 
 const TableContents = styled.div`
   width: 1100px;
   height: 50px;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   align-items: center;
+  justify-items: center;
   background: #aba6ea;
   color: white;
   font-style: normal;

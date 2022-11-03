@@ -49,7 +49,7 @@ const ProfileImgWrapper = styled.div`
 `;
 
 const ProfileWrapper = styled(Link)`
-  width: 100px;
+  width: 150px;
   display: flex;
   justify-content: space-around;
   align-items: center;
