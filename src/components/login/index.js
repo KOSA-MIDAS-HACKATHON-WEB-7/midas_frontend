@@ -119,7 +119,7 @@ const SignUpText = styled.span`
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 22px;
   letter-spacing: -0.017em;
   cursor: pointer;
