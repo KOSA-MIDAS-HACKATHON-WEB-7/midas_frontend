@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { ApplicationImage } from "../../assets";
-import Header from "../common/header";
+import Header from "../common/header/UserHeader";
 
 const Application = () => {
   return (

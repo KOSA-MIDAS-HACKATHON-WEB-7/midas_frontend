@@ -1,7 +1,22 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginPage = () => {
+
+  const [input, setInput] = useState({
+    id: "",
+    password: ""
+  })
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value
+    });
+  }
+
   return (
     <LoginBackground>
       <LoginBlock>
@@ -9,16 +24,16 @@ const LoginPage = () => {
           <LoginWrapper>
             <Title>로그인</Title>
             <Input>
-              <input placeholder="아이디를 입력해주세요." />
+              <input type="text" name="id" value={input.id} onChange={onChange} placeholder="아이디를 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="비밀번호를 입력해주세요." />
+              <input type="password" name="password" value={input.password} onChange={onChange} placeholder="비밀번호를 입력해주세요." />
             </Input>
             <BottomWrapper>
               <SignUpTextWrapper>
                 <SignUpText to="/signup">회원가입</SignUpText>
-                <SignUpText to="/">아이디 찾기</SignUpText>
-                <SignUpText to="/">비밀번호 찾기</SignUpText>
+                <SignUpText to="/findid">아이디 찾기</SignUpText>
+                <SignUpText to="/change">비밀번호 변경</SignUpText>
               </SignUpTextWrapper>
               <SubmitButton>로그인</SubmitButton>
             </BottomWrapper>

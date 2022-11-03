@@ -1,5 +1,5 @@
-import Header from "../common/header";
-import FullCalendar from "@fullcalendar/react";
+import Header from "../common/header/UserHeader";
+import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from "@fullcalendar/timegrid";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";

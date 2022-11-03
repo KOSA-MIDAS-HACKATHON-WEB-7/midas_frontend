@@ -1,7 +1,27 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const SingupPage = () => {
+
+  const [input, setInput] = useState({
+    email: "",
+    code: "",
+    id: "",
+    password: "",
+    name: "",
+    dept: "",
+    position: ""
+  })
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInput({
+      ...input,
+      [name]: value
+    });
+  }
+
   return (
     <LoginBackground>
       <LoginBlock>
@@ -9,28 +29,28 @@ const SingupPage = () => {
           <LoginWrapper>
             <Title>회원가입</Title>
             <EmailInput>
-              <input placeholder="이메일을을 입력해주세요." />
+              <input type="email" name="email" value={input.email} onChange={onChange} placeholder="이메일을을 입력해주세요." />
               <Auth>
                 <span>인증요청</span>
               </Auth>
             </EmailInput>
             <Input>
-              <input placeholder="인증번호를 입력해주세요." />
+              <input type="text" name="code" value={input.code} onChange={onChange} placeholder="인증번호를 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="아이디를 입력해주세요." />
+              <input type="text" name="id" value={input.id} onChange={onChange} placeholder="아이디를 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="비밀번호를 입력해주세요." />
+              <input type="password" name="password" value={input.password} onChange={onChange} placeholder="비밀번호를 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="이름을 입력해주세요." />
+              <input type="text" name="name" value={input.name} onChange={onChange} placeholder="이름을 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="부서를 입력해주세요." />
+              <input type="text" name="dept" value={input.dept} onChange={onChange} placeholder="부서를 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="직책을 입력해주세요." />
+              <input type="text" name="position" value={input.position} onChange={onChange} placeholder="직책을 입력해주세요." />
             </Input>
           </LoginWrapper>
           <SignupButton>회원가입</SignupButton>

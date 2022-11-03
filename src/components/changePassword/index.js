@@ -3,9 +3,22 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const ChangePassword = () => {
-  const [inputs, setInputs] = useState({
+
+    const [input, setInput] = useState({
+        name: "",
+        email: "",
+        code: "",
+        changePassword: ""
+      })
     
-  })
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        setInput({
+          ...input,
+          [name]: value
+        });
+    }
+
   return (
     <LoginBackground>
       <LoginBlock>
@@ -13,19 +26,19 @@ const ChangePassword = () => {
           <LoginWrapper>
             <Title>비밀번호 변경</Title>
             <Input>
-              <input placeholder="이름을 입력해주세요." />
+              <input type="text" name="name" value={input.name} onChange={onChange} placeholder="이름을 입력해주세요." />
             </Input>
             <EmailInput>
-              <input placeholder="이메일을을 입력해주세요." />
+              <input type="email" name="email" value={input.email} onChange={onChange} placeholder="이메일을을 입력해주세요." />
               <Auth>
                 <span>전송</span>
               </Auth>
             </EmailInput>
             <Input>
-              <input placeholder="인증코드를 입력해주세요." />
+              <input type="code" name="code" value={input.code} onChange={onChange} placeholder="인증코드를 입력해주세요." />
             </Input>
             <Input>
-              <input placeholder="변경할 비밀번호를 입력해주세요." />
+              <input type="password" name="changePassword" value={input.changePassword} onChange={onChange} placeholder="변경할 비밀번호를 입력해주세요." />
             </Input>
             <Minimum>비밀번호 최소길이: 4글자</Minimum>
           </LoginWrapper>
