@@ -63,7 +63,7 @@ const SingupPage = () => {
               따라 근무 시간·근무 환경을 조절할 수 있는 제도
             </IntroduceText>
             <ButtonWrapper>
-            <MoreInformation to="/about">더 알아보기</MoreInformation>
+              <MoreInformation to="/about">더 알아보기</MoreInformation>
             </ButtonWrapper>
           </IntroduceWrapper>
         </Introduce>
@@ -137,19 +137,19 @@ const Input = styled.div`
 `;
 
 const EmailInput = styled.div`
-    width: 500px;
-    height: 50px;
-    background: #fdfdfd;
-    border: 1px solid #d9d9d9;
-    border-radius: 10px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    input {
+  width: 500px;
+  height: 50px;
+  background: #fdfdfd;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  input {
     width: 80%;
     margin-left: 20px;
-    }
-    position: relative;
+  }
+  position: relative;
 `;
 
 const Title = styled.span`
@@ -207,24 +207,24 @@ const LoginWrapper = styled.div`
 `;
 
 const Auth = styled.div`
-    background-color: #ABA6EA;
-    padding: 5px 10px 5px 10px;
-    color: white;
-    position: absolute;
-    right: 20px;
-    border-radius: 10px;
-    cursor: pointer;
+  background-color: #aba6ea;
+  padding: 5px 10px 5px 10px;
+  color: white;
+  position: absolute;
+  right: 20px;
+  border-radius: 10px;
+  cursor: pointer;
 `;
 
 const SignupButton = styled.button`
-    background-color: #ABA6EA;
-    width: 200px;
-    height: 45px;
-    color: white;
-    cursor: pointer;
-    border-radius: 10px;
-    font-size: 20px;
-    margin: 40px auto auto;
+  background-color: #aba6ea;
+  width: 200px;
+  height: 45px;
+  color: white;
+  cursor: pointer;
+  border-radius: 10px;
+  font-size: 20px;
+  margin: 40px auto auto;
 `;
 
 export default SingupPage;

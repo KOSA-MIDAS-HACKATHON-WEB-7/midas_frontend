@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { MainLogo, Profile } from "../../../../assets";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
 const UserHeader = () => {
   return (
     <HeaderBackGround>
-      <LogoWrapper>
+      <LogoWrapper to="/main">
         <Logo src={MainLogo} alt="로고" />
         <LogoText>기관지</LogoText>
       </LogoWrapper>
@@ -16,7 +16,7 @@ const UserHeader = () => {
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
         </ProfileImgWrapper>
-        <NameText>아무거</NameText>
+        <NameText>김경호</NameText>
       </ProfileWrapper>
     </HeaderBackGround>
   );
@@ -29,6 +29,7 @@ const NameText = styled.span`
   line-height: 27px;
   letter-spacing: -0.017em;
   cursor: pointer;
+  color: #000000;
 `;
 
 const ProfileImgWrapper = styled.div`
@@ -48,6 +49,7 @@ const ProfileWrapper = styled(Link)`
   align-items: center;
   margin-right: 100px;
   text-decoration: none;
+  color: #000000;
 `;
 
 const HeaderBackGround = styled.div`
@@ -67,35 +69,41 @@ const Logo = styled.img`
 
 const LogoText = styled.span`
   font-style: normal;
-  font-weight: 600;
+  font-weight: 800;
   font-size: 20px;
   line-height: 27px;
   letter-spacing: -0.017em;
   color: #fdfdfd;
   cursor: pointer;
+  margin-left: 10px;
 `;
 
-const LogoWrapper = styled.div`
+const LogoWrapper = styled(Link)`
   width: 120px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-left: 30px;
+  text-decoration: none;
+  color: #fdfdfd;
 `;
 
 const NavWrapper = styled.div`
   width: 150px;
   margin-left: 70em;
-`
+`;
 
 const HomeWorking = styled(Link)`
-  font-family: 'Noto Sans';
+  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 27px;
   color: #000000;
   text-decoration: none;
-`
+  :hover {
+    text-decoration: underline;
+  }
+`;
 
 export default UserHeader;
