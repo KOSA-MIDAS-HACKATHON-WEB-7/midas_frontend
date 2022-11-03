@@ -5,11 +5,17 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { Character } from "../../assets";
 import styled from "styled-components";
+import { useCallback, useRef } from "react";
 
 const Main = () => {
-  const handlerClick = () => {
-    const { scrollY } = window;
-  };
+  const scrollRef = useRef(null);
+  const handlerClick = useCallback(() => {
+    scrollRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  }, []);
   return (
     <>
       <Header />
@@ -20,8 +26,10 @@ const Main = () => {
         </Introduce>
         <CharcterImage src={Character} alt="character" />
       </MainIntroduce>
-      <IntroduceTitle>나의 근무 시간 확인</IntroduceTitle>
-      <Flex>
+      <IntroduceTitle onClick={handlerClick}>
+        나의 근무 시간 확인
+      </IntroduceTitle>
+      <Flex ref={scrollRef}>
         <Calendar>
           <FullCalendar
             plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}
@@ -41,7 +49,7 @@ const Main = () => {
           />
         </Calendar>
         <Time>
-          <Title onClick={handlerClick}>이번 주 총 근무시간</Title>
+          <Title>이번 주 총 근무시간</Title>
           <Week>29/40 (단위:시간)</Week>
           <Today>
             Today: <span>0시간 1분</span>
@@ -154,6 +162,7 @@ const StartButton = styled.button`
 `;
 
 const Title = styled.p`
+  cursor: pointer;
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 600;
