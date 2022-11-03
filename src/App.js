@@ -1,5 +1,6 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import LoginPage from "./components/login";
+import SingupPage from "./components/signup/singup";
 import StyleProvider from "./style";
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SingupPage />} />
         </Routes>
       </BrowserRouter>
     </StyleProvider>
