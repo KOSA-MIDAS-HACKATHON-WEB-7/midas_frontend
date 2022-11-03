@@ -4,9 +4,13 @@ import Header from "../common/header/UserHeader";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { user } from "../../recoil/atom";
 
 const Application = () => {
   const nav = useNavigate();
+  const userinfo = useRecoilValue(user);
+  console.log(userinfo);
   const [input, setInput] = useState({
     startDate: 0,
     endDate: 0,
@@ -28,7 +32,7 @@ const Application = () => {
       .post(`http://localhost:8080/api/user/work-home/application`, {
         ...input,
         id: null,
-        userId: 2,
+        userId: 4,
       })
       .then((res) => {
         console.log(res);

@@ -5,11 +5,24 @@ import Header from "../common/header/UserHeader";
 import ApplicationList from "./applicationList";
 import DeleteModal from "./deleteModal";
 import ReasonModal from "./reasonModal";
+import { useRecoilValue } from "recoil";
+import { user } from "../../recoil/atom";
+import instance from "../../instance";
 
 const Mypage = () => {
   const [modal, setModal] = useState(false);
   const [rModal, setRModal] = useState(false);
-
+  const userinfo = useRecoilValue(user);
+  const onClick = () => {
+    instance
+      .delete(`/auth/logout`)
+      .then(() => {
+        alert("로그아웃되었습니다.");
+        localStorage.clear();
+      })
+      .catch((err) => console.error(err));
+  };
+  console.log(userinfo);
   useEffect(() => {
     if (modal || rModal) {
       window.scrollTo(0, 0);
@@ -22,7 +35,7 @@ const Mypage = () => {
   return (
     <>
       {modal && <DeleteModal setModal={setModal} />}
-      {rModal && <ReasonModal setModal={setRModal} /> }
+      {rModal && <ReasonModal setModal={setRModal} />}
       <Header />
       <UserWrapper>
         <UserInfo>
@@ -30,9 +43,10 @@ const Mypage = () => {
             <Img src={Profile} alt="icon" />
           </ImgWrapper>
           <Info>
-            <p>김경호</p>
-            <Company>마이다스IT</Company>
-            <Dept>Frontend Developer</Dept>
+            <p>{userinfo.userName}</p>
+            <Company>{userinfo.department}</Company>
+            <Dept>{userinfo.position}</Dept>
+            <LogOut onClick={onClick}>로그아웃</LogOut>
           </Info>
         </UserInfo>
         <ChangePassword onClick={() => setModal((prev) => !prev)}>
@@ -41,28 +55,22 @@ const Mypage = () => {
         <HomeWorkingCheck>
           <Text>재택근무 확인하기</Text>
           <List>
-            <ApplicationList
-              start={"2022.10.31"}
-              end={"2022.11.05"}
-              state={"승인"}
-            />
-            <ApplicationList
-              start={"2022.11.06"}
-              end={"2022.11.10"}
-              state={"대기"}
-            />
-            <ApplicationList
-              start={"2022.12.31"}
-              end={"2040.01.01"}
-              state={"거절"}
-              onClick={setRModal}
-            />
+            <ApplicationList />
           </List>
         </HomeWorkingCheck>
       </UserWrapper>
     </>
   );
 };
+
+const LogOut = styled.span`
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  :hover {
+    text-decoration: underline;
+  }
+`;
 
 const ImgWrapper = styled.div`
   width: 100px;
@@ -123,6 +131,7 @@ const Dept = styled.span`
   line-height: 22px;
   margin-left: 20px;
   color: #aba6ea;
+  margin-right: 30px;
 `;
 
 const ChangePassword = styled.button`
