@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import { MainLogo, Profile } from "../../../../assets";
 import { Link } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { user } from "../../../../recoil/atom";
 
 const UserHeader = () => {
+
+  const userinfo = useRecoilValue(user);
+
   return (
     <HeaderBackGround>
       <LogoWrapper to="/main">
@@ -16,7 +21,7 @@ const UserHeader = () => {
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
         </ProfileImgWrapper>
-        <NameText>김경호</NameText>
+        <NameText>{userinfo.userName}</NameText>
       </ProfileWrapper>
     </HeaderBackGround>
   );
@@ -28,6 +33,7 @@ const NameText = styled.span`
   font-size: 20px;
   line-height: 27px;
   letter-spacing: -0.017em;
+  max-width: 150px;
   cursor: pointer;
   color: #000000;
 `;
@@ -43,7 +49,7 @@ const ProfileImgWrapper = styled.div`
 `;
 
 const ProfileWrapper = styled(Link)`
-  width: 100px;
+  width: 150px;
   display: flex;
   justify-content: space-around;
   align-items: center;

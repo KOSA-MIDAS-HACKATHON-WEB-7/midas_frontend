@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import instance from "../../instance";
 
 const FindId = () => {
 
     const [input, setInput] = useState({
         name: "",
-        email: "",
-        code: ""
-      })
+        email: ""
+    })
+
+    const [code, setCode] = useState("");
     
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -16,6 +18,30 @@ const FindId = () => {
           ...input,
           [name]: value
         });
+    }
+
+    const findId = () => {
+      instance.post('/api/user/find-id/email-auth', input)
+      .then((res)=>{
+        alert('메일을 확인해주세요.')
+      })
+      .catch((e)=>{
+        alert('오류가 발생했습니다')
+        console.log(e)
+      })
+    }
+
+    const checkCode = () => {
+      instance.post('/api/user/find-id/check-auth-code', {
+        email: input.email,
+        code: code
+      }).then((res)=>{
+        alert(`아이디: ${res.data}`)
+      })
+      .catch((e)=>{
+        alert('오류가 발생했습니다')
+        console.log(e)
+      })
     }
 
   return (
@@ -30,14 +56,14 @@ const FindId = () => {
             <EmailInput>
               <input type="email" name="email" value={input.email} onChange={onChange} placeholder="이메일을을 입력해주세요." />
               <Auth>
-                <span>전송</span>
+                <span onClick={findId}>전송</span>
               </Auth>
             </EmailInput>
             <Input>
-              <input type="code" name="code" value={input.code} onChange={onChange} placeholder="인증코드를 입력해주세요." />
+              <input type="code" name="code" value={code} onChange={(e)=> setCode(e.target.value)} placeholder="인증코드를 입력해주세요." />
             </Input>
           </LoginWrapper>
-          <SignupButton>다음</SignupButton>
+          <SignupButton onClick={checkCode}>찾기</SignupButton>
         </Login>
         <Introduce>
           <IntroduceWrapper>
