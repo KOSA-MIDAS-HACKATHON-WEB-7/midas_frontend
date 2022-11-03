@@ -14,7 +14,7 @@ const AdminModal = ({ index, clickindex, values, setModal }) => {
   const modifyFunc = (data) => {
     console.log(data)
     instance.put('/admin/user-info', {
-      accountId: data.accountId,
+      accountId: values.accountId,
       position: data.position,
       department: data.department,
       newAccountId: data.accountId
