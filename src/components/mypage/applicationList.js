@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const ApplicationList = ({ start, end, state }) => {
+const ApplicationList = ({ start, end, state, onClick }) => {
   const myDelete = () => {
     const result = window.confirm("삭제하시겠습니까?");
   };
 
   return (
-    <ListWrapper>
+    <ListWrapper onClick={onClick}>
       <Date>
         {start} ~ {end}
       </Date>
