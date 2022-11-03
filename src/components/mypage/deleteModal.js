@@ -1,18 +1,70 @@
 import styled from "styled-components";
+import { useState } from "react";
+import axios from "axios";
 
 const DeleteModal = ({ setModal }) => {
+  const [input, setInput] = useState({
+    beforePassword: "",
+    afterPassword: "",
+    afterPasswordCheck: "",
+  });
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setInput((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const submitClick = () => {
+    if (input.afterPassword.length < 4 || input.afterPasswordCheck < 4) {
+      alert("비밀번호 길이가 짧습니다.");
+      return;
+    }
+    axios
+      .put(`http://localhost:8080/auth/update-password-mypage`, {
+        accountId: "asdfq",
+        ...input,
+      })
+      .then((res) => {
+        console.log(res);
+        alert("비밀번호가 변경되었습니다.");
+        setModal(false);
+      })
+      .catch((err) => console.error(err));
+  };
   return (
     <>
       <Modal>
         <Title>비밀번호 변경</Title>
         <Input>
-          <input placeholder="기존 비밀번호를 입력해주세요." />
+          <input
+            value={input.beforePassword}
+            onChange={onChange}
+            name="beforePassword"
+            placeholder="기존 비밀번호를 입력해주세요."
+            type="password"
+          />
         </Input>
         <Input>
-          <input placeholder="변경할 비밀번호를 입력해주세요." />
+          <input
+            value={input.afterPassword}
+            onChange={onChange}
+            name="afterPassword"
+            placeholder="변경할 비밀번호를 입력해주세요."
+            type="password"
+          />
+        </Input>
+        <Input>
+          <input
+            value={input.afterPasswordCheck}
+            onChange={onChange}
+            name="afterPasswordCheck"
+            placeholder="변경할 비밀번호를 다시 입력해주세요."
+            type="password"
+          />
         </Input>
         <p>비밀번호 최소길이: 4글자</p>
-        <Submit>변경</Submit>
+        <Submit onClick={submitClick}>변경</Submit>
       </Modal>
       <ModalBackground onClick={() => setModal(false)} />
     </>
