@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import { MainLogo, Profile } from "../../../../assets";
 import { Link } from 'react-router-dom'
+import { useRecoilValue } from "recoil";
+import { user } from "../../../../recoil/atom";
 
 const AdminHeader = () => {
+  
+  const userinfo = useRecoilValue(user);
+
   return (
     <HeaderBackGround>
       <LogoWrapper>
@@ -18,7 +23,7 @@ const AdminHeader = () => {
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
         </ProfileImgWrapper>
-        <NameText>아무거</NameText>
+        <NameText>{userinfo.userName}</NameText>
       </ProfileWrapper>
     </HeaderBackGround>
   );
