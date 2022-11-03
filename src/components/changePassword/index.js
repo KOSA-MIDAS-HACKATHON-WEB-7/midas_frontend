@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import instance from "../../instance";
 
 const ChangePassword = () => {
 
     const [input, setInput] = useState({
-        name: "",
         email: "",
         code: "",
-        changePassword: ""
+        accountId: "",
+        beforePassword: "",
+        afterPassword: "",
+        afterPasswordCheck: "",
       })
+
+      const [code, setCode] = useState("");
+      const [certi, setCerti] = useState(false);
     
     const onChange = (e) => {
         const { name, value } = e.target;
@@ -19,30 +25,80 @@ const ChangePassword = () => {
         });
     }
 
+    const auth = () =>{
+      instance.post('/api/user/find-password/email-auth', {
+        accountId: input.accountId
+      })
+      .then((res)=>{
+        setCode(res.data)
+      })
+      .catch((e)=>{
+        alert("오류 발생")
+        console.log(e)
+      })
+    }
+
+    const emailAuth = () => {
+      instance.post('/api/user/find-password/check-auth-code', {
+        accountId: input.accountId,
+        code: code
+      })
+      .then((res)=>{
+        setCerti(true)
+      })
+      .catch((e)=>{
+        alert("오류 발생")
+        console.log(e)
+      })
+    }
+    
+    const changePass = () => {
+      instance.put('/auth/update-password-mypage', {
+        accountId: input.accountId,
+        beforePassword: input.beforePassword,
+        afterPassword: input.afterPassword,
+        afterPasswordCheck: input.afterPasswordCheck
+      })
+      .then((res)=>{
+        alert('변경 성공')
+        window.location.href = "/";
+      })
+      .catch((e)=>{
+        alert('오류 발생')
+        console.log(e)
+      })
+    }
+
   return (
     <LoginBackground>
       <LoginBlock>
         <Login>
           <LoginWrapper>
             <Title>비밀번호 변경</Title>
-            <Input>
-              <input type="text" name="name" value={input.name} onChange={onChange} placeholder="이름을 입력해주세요." />
-            </Input>
             <EmailInput>
-              <input type="email" name="email" value={input.email} onChange={onChange} placeholder="이메일을을 입력해주세요." />
+              <input type="email" name="accountId" value={input.accountId} onChange={onChange} placeholder="아이디를 입력해주세요." />
               <Auth>
-                <span>전송</span>
+                <span onClick={auth}>전송</span>
+              </Auth>
+            </EmailInput>
+            <EmailInput>
+              <input type="code" name="code" value={input.code} onChange={onChange} placeholder="인증코드를 입력해주세요." />
+              <Auth>
+                <span onClick={emailAuth}>인증</span>
               </Auth>
             </EmailInput>
             <Input>
-              <input type="code" name="code" value={input.code} onChange={onChange} placeholder="인증코드를 입력해주세요." />
+              <input type="password" name="beforePassword" value={input.beforePassword} onChange={onChange} placeholder="변경전 비밀번호를 입력해주세요." />
             </Input>
             <Input>
-              <input type="password" name="changePassword" value={input.changePassword} onChange={onChange} placeholder="변경할 비밀번호를 입력해주세요." />
+              <input type="password" name="afterPassword" value={input.afterPassword} onChange={onChange} placeholder="변경할 비밀번호를 입력해주세요." />
+            </Input>
+            <Input>
+              <input type="password" name="afterPasswordCheck" value={input.afterPasswordCheck} onChange={onChange} placeholder="변경할 비밀번호를 재입력해주세요." />
             </Input>
             <Minimum>비밀번호 최소길이: 4글자</Minimum>
           </LoginWrapper>
-          <SignupButton>다음</SignupButton>
+          <SignupButton onClick={changePass} disabled={certi}>확인</SignupButton>
         </Login>
         <Introduce>
           <IntroduceWrapper>
@@ -116,7 +172,7 @@ const Input = styled.div`
   background: #fdfdfd;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   align-items: center;
   input {
@@ -144,7 +200,7 @@ const EmailInput = styled.div`
   background: #fdfdfd;
   border: 1px solid #d9d9d9;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   align-items: center;
   input {
@@ -157,7 +213,7 @@ const EmailInput = styled.div`
 const Title = styled.span`
   font-weight: 700;
   font-size: 32px;
-  margin-top: 140px;
+  margin-top: 70px;
   line-height: 44px;
   text-align: center;
   letter-spacing: -0.017em;
