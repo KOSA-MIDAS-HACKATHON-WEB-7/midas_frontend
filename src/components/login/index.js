@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginPage = () => {
@@ -15,9 +16,9 @@ const LoginPage = () => {
             </Input>
             <BottomWrapper>
               <SignUpTextWrapper>
-                <SignUpText>회원가입</SignUpText>
-                <SignUpText>아이디 찾기</SignUpText>
-                <SignUpText>비밀번호 찾기</SignUpText>
+                <SignUpText to="/signup">회원가입</SignUpText>
+                <SignUpText to="/">아이디 찾기</SignUpText>
+                <SignUpText to="/">비밀번호 찾기</SignUpText>
               </SignUpTextWrapper>
               <SubmitButton>로그인</SubmitButton>
             </BottomWrapper>
@@ -115,7 +116,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
-const SignUpText = styled.span`
+const SignUpText = styled(Link)`
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
@@ -123,6 +124,8 @@ const SignUpText = styled.span`
   line-height: 22px;
   letter-spacing: -0.017em;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
   :hover {
     text-decoration: underline;
   }
