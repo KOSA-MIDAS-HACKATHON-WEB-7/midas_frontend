@@ -1,40 +1,47 @@
 import styled from "styled-components";
 import { ApplicationImage } from "../../assets";
 import Header from "../common/header/UserHeader";
-import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { user } from "../../recoil/atom";
+import instance from "../../instance";
+
 
 const Application = () => {
   const nav = useNavigate();
+  const userinfo = useRecoilValue(user);
+
   const [input, setInput] = useState({
+    id: null,
     startDate: 0,
     endDate: 0,
     reason: "",
   });
   const onChange = (e) => {
     const { name, value } = e.target;
-    setInput((prev) => ({
-      ...prev,
+    setInput({
+      ...input,
       [name]: value,
-    }));
+    });
   };
   const onClick = () => {
     if (input.reason === "") {
       alert("사유를 적어주세요");
       return;
     }
-    axios
-      .post(`http://localhost:8080/api/user/work-home/application`, {
+    instance
+      .post(`/api/user/work-home/application`, {
         ...input,
-        id: null,
-        userId: 2,
+        userId: userinfo.id
       })
       .then((res) => {
         console.log(res);
         nav(-1);
       })
       .catch((err) => {
+        console.log(userinfo)
+        console.log(input)
         console.error(err);
         alert("오류 발생");
       });
