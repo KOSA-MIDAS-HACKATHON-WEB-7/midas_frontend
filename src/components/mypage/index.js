@@ -4,22 +4,25 @@ import { Profile } from "../../assets";
 import Header from "../common/header/UserHeader";
 import ApplicationList from "./applicationList";
 import DeleteModal from "./deleteModal";
+import ReasonModal from "./reasonModal";
 
 const Mypage = () => {
   const [modal, setModal] = useState(false);
+  const [rModal, setRModal] = useState(false);
 
   useEffect(() => {
-    if (modal) {
+    if (modal || rModal) {
       window.scrollTo(0, 0);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [modal]);
+  }, [modal, rModal]);
 
   return (
     <>
       {modal && <DeleteModal setModal={setModal} />}
+      {rModal && <ReasonModal setModal={setRModal} /> }
       <Header />
       <UserWrapper>
         <UserInfo>
@@ -52,6 +55,7 @@ const Mypage = () => {
               start={"2022.12.31"}
               end={"2040.01.01"}
               state={"거절"}
+              onClick={setRModal}
             />
           </List>
         </HomeWorkingCheck>

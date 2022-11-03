@@ -1,26 +1,29 @@
 import styled from "styled-components";
-import { User } from "../../constance/user";
 import { useState } from "react";
-import AdminModal from "./adminmodal";
-import AdminHeader from "../common/header/AdminHeader";
+import AdminHeader from "../../common/header/AdminHeader"
+import { User } from "../../../constance/user";
 
-const AdminPage = () => {
-  const [modal, setModal] = useState(false);
-  const [index, setIndex] = useState(0);
+const CheckSignup = () => {
+
+    const confirmSignup = () => {
+        const result = window.confirm("회원가입을 허용하시겠습니까? (취소시 허용 안함으로 간주)")
+        
+    }
+
   const contents = [
     "Name",
     "ID",
     "Password",
     "Dept",
     "Position",
-    "Working",
+    "Join",
   ];
   return (
     <>
       <AdminHeader />
       <InformationWrapper>
         <Information>
-          <AdminTitle>Workers List</AdminTitle>
+          <AdminTitle>Signup List</AdminTitle>
           <TableContents>
             {contents.map((e, i) => (
               <span key={i}>{e}</span>
@@ -28,22 +31,14 @@ const AdminPage = () => {
           </TableContents>
           {User.map((e, i) => (
             <div key={i}>
-              <UserTable
-                onClick={() => {
-                  setModal(true);
-                  setIndex(i);
-                }}
-              >
+              <UserTable>
                 <span>{e.name}</span>
                 <span>{e.id}</span>
                 <span>{e.password}</span>
                 <span>{e.department}</span>
                 <span>{e.position}</span>
-                <Working working={e.working}>{e.working}</Working>
+                <ConfirmButton onClick={confirmSignup}>confirm</ConfirmButton>
               </UserTable>
-              {modal && (
-                <AdminModal index={index} clickindex={i} values={e} setModal={setModal} />
-              )}
             </div>
           ))}
         </Information>
@@ -52,9 +47,18 @@ const AdminPage = () => {
   );
 };
 
-const Working = styled.span`
-  color: ${(props) => (props.working === "Company" ? "#53DC19" : "#E03131")};
-`;
+
+const ConfirmButton = styled.p`
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.017em;
+    color: #53DC19;
+    margin-right: 10px;
+    cursor: pointer;
+`
 
 const UserTable = styled.div`
   height: 50px;
@@ -63,7 +67,6 @@ const UserTable = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  cursor: pointer;
   span {
     font-family: "Noto Sans";
     font-style: normal;
@@ -115,4 +118,4 @@ const AdminTitle = styled.span`
   margin: 150px 0 50px 0;
 `;
 
-export default AdminPage;
+export default CheckSignup;
