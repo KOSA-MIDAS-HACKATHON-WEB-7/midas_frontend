@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { MainLogo, Profile } from "../../../assets";
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
@@ -9,6 +10,9 @@ const Header = () => {
         <LogoText>기관지</LogoText>
       </LogoWrapper>
       <ProfileWrapper>
+        <NavWrapper>
+          
+        </NavWrapper>
         <ProfileImgWrapper>
           <img src={Profile} alt="프로필 사진" />
         </ProfileImgWrapper>
@@ -77,5 +81,13 @@ const LogoWrapper = styled.div`
   align-items: center;
   margin-left: 30px;
 `;
+
+const NavWrapper = styled.div`
+
+`
+
+const HomeWorking = styled(Link)`
+
+`
 
 export default Header;
