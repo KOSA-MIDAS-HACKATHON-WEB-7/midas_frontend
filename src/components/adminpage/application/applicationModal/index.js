@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
+import instance from "../../../../instance";
 
 
 const ApplicationModal = ({ index, clickindex, values, setModal }) => {
@@ -8,6 +9,35 @@ const ApplicationModal = ({ index, clickindex, values, setModal }) => {
   }, []);
   const closeModal = () => setModal(false);
 
+  const ok = () => {
+    instance.put(`/admin/work-home/pos/${values.id}`,
+    {headers:{
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    }})
+    .then((res)=>{
+      alert("승인하였습니다.")
+      setModal(false)
+    })
+    .catch((e)=>{
+      alert("오류 발생")
+      setModal(false)
+    })
+  }
+
+  const no = () => {
+    instance.put(`/admin/work-home/neq/${values.id}`, {headers:{
+      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    }} )
+    .then((res)=>{
+      alert("거절하였습니다.")
+      setModal(false)
+    })
+    .catch((e)=>{
+      alert("오류 발생")
+      setModal(false)
+    })
+  }
+
   if (index !== clickindex) {
     return;
   }
@@ -15,29 +45,69 @@ const ApplicationModal = ({ index, clickindex, values, setModal }) => {
     <ModalBackground onClick={closeModal}>
       <ModalItems onClick={(e) => e.stopPropagation()}>
         <ValueWrapper>
-          <UserName>{values.name}</UserName>
-          <p>{values.department}</p>
-          <p>{values.position}</p>
+          <UserName>{values.user.userName}</UserName>
+          <p>{values.user.department}</p>
+          <p>{values.user.position}</p>
           <DateWrapper>
             <Date>
                 <p>시작일</p>
-                <YMD>2022.11.01</YMD>
+                <YMD>{values.startDate}</YMD>
             </Date>
             <span>~</span>
             <Date>
                 <p>종료일</p>
-                <YMD>2022.11.02</YMD>
+                <YMD>{values.endDate}</YMD>
             </Date>
           </DateWrapper>
           <ReasonWrapper>
             <p>재택 사유</p>
-            <Reason>밤샘 해커톤을 했습니다</Reason>
+            <Reason>{values.reason}</Reason>
           </ReasonWrapper>
         </ValueWrapper>
+        <Flex>
+          <OK onClick={ok}>승인</OK>
+          <NO onClick={no}>거절</NO>
+        </Flex>
       </ModalItems>
     </ModalBackground>
   ) : null;
 };
+
+const Flex = styled.div`
+  display: flex;
+`
+
+const OK = styled.button`
+  background: #FFFFFF;
+  border: 2px solid #53DC19;
+  border-radius: 10px;
+  width: 120px;
+  margin-right: 80px;
+  height: 35px; 
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.017em;
+  color: #53DC19;
+`
+
+const NO = styled.button`
+  width: 120px;
+  height: 35px; 
+  background: #FFFFFF;
+  border: 2px solid #E03131;
+  border-radius: 10px;
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.017em;
+  color: #E03131;
+
+`
 
 const UserName = styled.span`
   font-family: "Noto Sans";

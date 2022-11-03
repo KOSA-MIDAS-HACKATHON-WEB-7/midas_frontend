@@ -46,6 +46,7 @@ const SingupPage = () => {
     })
     .then((res)=>{
       setAble(false)
+      alert("인증이 완료되었습니다.")
     })
     .catch((e)=>{
       console.log(e)
