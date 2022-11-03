@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const SingupPage = () => {
   return (
@@ -42,9 +43,7 @@ const SingupPage = () => {
               따라 근무 시간·근무 환경을 조절할 수 있는 제도
             </IntroduceText>
             <ButtonWrapper>
-              <MoreInformation>
-                <span>더 알아보기</span>
-              </MoreInformation>
+            <MoreInformation to="/about">더 알아보기</MoreInformation>
             </ButtonWrapper>
           </IntroduceWrapper>
         </Introduce>
@@ -59,7 +58,7 @@ const ButtonWrapper = styled.div`
   justify-content: center;
 `;
 
-const MoreInformation = styled.div`
+const MoreInformation = styled(Link)`
   width: 200px;
   height: 50px;
   display: flex;
@@ -72,6 +71,7 @@ const MoreInformation = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
+  text-decoration: none;
   letter-spacing: -0.017em;
 `;
 
@@ -199,7 +199,7 @@ const Auth = styled.div`
 const SignupButton = styled.button`
     background-color: #ABA6EA;
     width: 200px;
-    height: 40px;
+    height: 45px;
     color: white;
     cursor: pointer;
     border-radius: 10px;
