@@ -5,7 +5,6 @@ const LoginPage = () => {
     <LoginBackground>
       <LoginBlock>
         <Login>
-          <LogoImage alt="로고" />
           <LoginWrapper>
             <Title>로그인</Title>
             <Input>
@@ -15,7 +14,11 @@ const LoginPage = () => {
               <input placeholder="비밀번호를 입력해주세요." />
             </Input>
             <BottomWrapper>
-              <SignUpText>아직 계정이 없으신가요?</SignUpText>
+              <SignUpTextWrapper>
+                <SignUpText>회원가입</SignUpText>
+                <SignUpText>아이디 찾기</SignUpText>
+                <SignUpText>비밀번호 찾기</SignUpText>
+              </SignUpTextWrapper>
               <SubmitButton>로그인</SubmitButton>
             </BottomWrapper>
           </LoginWrapper>
@@ -38,6 +41,13 @@ const LoginPage = () => {
     </LoginBackground>
   );
 };
+
+const SignUpTextWrapper = styled.div`
+  width: 190px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
 const ButtonWrapper = styled.div`
   width: 100%;
@@ -109,7 +119,7 @@ const SignUpText = styled.span`
   font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 10px;
   line-height: 22px;
   letter-spacing: -0.017em;
   cursor: pointer;
@@ -148,6 +158,7 @@ const Login = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const Introduce = styled.div`
