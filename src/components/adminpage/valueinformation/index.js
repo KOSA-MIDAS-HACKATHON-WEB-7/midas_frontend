@@ -24,7 +24,7 @@ const ValueInformation = ({ values }) => {
         <ValueText>{values.coreTimeStart}</ValueText>
       </ValueItems>
       <ValueItems>
-        <ValueTitle>Core Start Time</ValueTitle>
+        <ValueTitle>Core End Time</ValueTitle>
         <ValueText>{values.coreTimeEnd}</ValueText>
       </ValueItems>
     </>
