@@ -21,22 +21,17 @@ const Main = () => {
       inline: "nearest",
     });
   }, []);
-  const [startHour, setStartHour] = useState(0);
-  const [startMin, setStartMin] = useState(0);
-  const [endHour, setEndHour] = useState(0);
-  const [endMin, setEndMin] = useState(0);
+  
   const timefunc = () => {
     const date = new Date();
     const hour = date.getHours();
     const min = date.getMinutes();
     if (!state) {
-      setStartHour(hour);
-      setStartMin(min);
       instance
         .post(
           "/api/officehour/start-work",
           {
-            userId: 11,
+            userId: userinfo.id,
           },
           {
             headers: {
@@ -49,14 +44,11 @@ const Main = () => {
         })
         .catch((err) => console.error(err));
     } else {
-      setEndHour(hour);
-      setEndMin(min);
-      
       instance
         .post(
           "/api/officehour/end-work",
           {
-            userId: 11,
+            userId: userinfo.id,
           },
           {
             headers: {
@@ -70,6 +62,7 @@ const Main = () => {
         .catch((err) => console.error(err));
     }
   };
+  
   return (
     <>
       <Header />

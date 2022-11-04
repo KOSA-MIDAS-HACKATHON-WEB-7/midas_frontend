@@ -11,8 +11,8 @@ const ApplicationModal = ({ index, clickindex, values, setModal }) => {
 
   const ok = () => {
     instance.put(`/admin/work-home/pos/${values.id}`,
-    {headers:{
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
+    { headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
     }})
     .then((res)=>{
       alert("승인하였습니다.")
@@ -25,9 +25,11 @@ const ApplicationModal = ({ index, clickindex, values, setModal }) => {
   }
 
   const no = () => {
-    instance.put(`/admin/work-home/neq/${values.id}`, {headers:{
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`
-    }} )
+    instance.put(`/admin/work-home/neq/${values.id}`, {
+      workHomeResponse: "안돼"
+    }, { headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    }})
     .then((res)=>{
       alert("거절하였습니다.")
       setModal(false)
