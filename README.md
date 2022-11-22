@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# 기관지(기록하고 관리하자! 지금 내 출퇴근 시간!)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img width="1680" alt="스크린샷 2022-11-22 오전 9 07 57" src="https://user-images.githubusercontent.com/81161675/203183000-d9cc5227-2629-4591-b312-486e1398bcf5.png">
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+> 기관지는 유연근무제의 문제점을 보안하기 위해 시작하게 되었습니다. 유연근무제란 통상의 근무시간·근무일을 변경하거나 근로자와 사용자가 근로시간이나 근로장소 등을 선택·조정하여 일과 생활을 조화롭게 하고, 인력활용의 효율성을 높일 수 있는 제도로 시간과 장소 상관없지 자신이 일하고 싶은 환경에서 일할 수 있는 시스템을 말합니다. 
+<br />
 
-### `npm start`
+### 사용 기술
+- Frontend : React, styled-components, axios, recoil
+- Backend : Spring-boot, ec2
+<br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 개발자
+- 프론트엔드 : 2명
+- 백엔드 : 2명
+- 디자인 : 1명
+<br />
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+직장인이 출근을 하고 사이트에 들어오면 출석 버튼을 누를 수 있습니다.
+<br />
+<br />
+<br />
+집에서 근무하고 싶을 때에는 재택근무 신청서를 제출할 수 있습니다.
+<br />
+<br />
+<br />
+자신이 한 주에 기본 근무 시간을 지켰는지 확인할 수 있습니다.
+<br />
+<br />
+<br />
+재택근무를 허락받았는지 거절받았는지 확인을 하고 만약 거절이라면 거절 사유를 볼 수 있습니다.
+<br />
+<br />
+<br />
+회사 상사들이 Admin 계정으로 근무 상태를 확인할 수 있습니다.
+<br />
+<br />
+<br />
+Admin 계정으로 재택근무 사유를 보고 승인 또는 거절할 수 있습니다.
